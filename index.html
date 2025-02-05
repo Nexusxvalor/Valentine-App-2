@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day App</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        body {
+            text-align: center;
+            font-family: 'Press Start 2P', cursive;
+            background-color: #ffebf0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .pixel-frame {
+            width: 400px;
+            height: 500px;
+            background: #ffe6e9;
+            border: 8px solid #ff4d6d;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+        .pixel-header {
+            background: #ff4d6d;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+            border-bottom: 5px solid #c83752;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .window-controls {
+            display: flex;
+            gap: 5px;
+        }
+        .window-btn {
+            width: 16px;
+            height: 16px;
+            background-color: #ff99a1;
+            border: 2px solid #c83752;
+            border-radius: 3px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: white;
+        }
+        .window-btn:hover {
+            background-color: #ff4d6d;
+        }
+        .menu-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .btn {
+            background-color: #ffcccb;
+            color: #d62839;
+            border: 3px solid #d62839;
+            padding: 15px;
+            font-size: 14px;
+            cursor: pointer;
+            width: 160px;
+            height: 140px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease-in-out;
+            box-shadow: 3px 3px 0px #c83752;
+        }
+        .btn:hover {
+            background-color: #ff99a1;
+            transform: scale(1.05);
+        }
+        .btn img {
+            width: 50px;
+            height: 50px;
+            image-rendering: pixelated;
+        }
+        .hidden {
+            display: none;
+        }
+        .back-button {
+            margin-top: auto;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+        .content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="pixel-frame" id="mainMenu">
+        <div class="pixel-header">
+            Valentine's Day <3
+            <div class="window-controls">
+                <div class="window-btn" onclick="minimizeWindow()">−</div>
+                <div class="window-btn" onclick="closeWindow()">×</div>
+            </div>
+        </div>
+        <div class="menu-container">
+            <button class="btn" onclick="showSection('messages')">
+                <img src="https://i.imgur.com/ZT2nRZP.png" alt="message"> Love Messages
+            </button>
+            <button class="btn" onclick="showSection('game')">
+                <img src="https://i.imgur.com/U7w9n7h.png" alt="game"> Mini Game
+            </button>
+            <button class="btn" onclick="showSection('memory')">
+                <img src="https://i.imgur.com/4iGgjpI.png" alt="memory"> Memory Jar
+            </button>
+        </div>
+    </div>
+
+    <div class="pixel-frame hidden" id="messages">
+        <div class="pixel-header">Love Messages</div>
+        <div class="content">
+            <p>"You are my sunshine on a rainy day!"</p>
+        </div>
+        <img src="back.png" class="back-button" onclick="goBack()" alt="Back">
+    </div>
+    
+    <div class="pixel-frame hidden" id="game">
+        <div class="pixel-header">Mini Game</div>
+        <div class="content">
+            <p>Click the hearts to score points!</p>
+        </div>
+        <img src="back.png" class="back-button" onclick="goBack()" alt="Back">
+    </div>
+    
+    <div class="pixel-frame hidden" id="memory">
+        <div class="pixel-header">Memory Jar</div>
+        <div class="content">
+            <p>Click to reveal a random memory:</p>
+            <button onclick="showMemory()">Reveal Memory</button>
+            <p id="memoryText"></p>
+        </div>
+        <img src="back.png" class="back-button" onclick="goBack()" alt="Back">
+    </div>
+
+    <script>
+        function showSection(section) {
+            document.getElementById("mainMenu").classList.add("hidden");
+            document.getElementById(section).classList.remove("hidden");
+        }
+        function goBack() {
+            document.querySelectorAll(".pixel-frame").forEach(frame => frame.classList.add("hidden"));
+            document.getElementById("mainMenu").classList.remove("hidden");
+        }
+        function minimizeWindow() {
+            alert("Minimize window (Feature to be implemented)");
+        }
+        function closeWindow() {
+            alert("Close window (Feature to be implemented)");
+        }
+        function showMemory() {
+            const memories = [
+                "That time we danced in the rain",
+                "Our first movie date",
+                "Making pancakes together",
+                "The surprise picnic you planned"
+            ];
+            document.getElementById("memoryText").innerText = memories[Math.floor(Math.random() * memories.length)];
+        }
+    </script>
+</body>
+</html>
